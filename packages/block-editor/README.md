@@ -335,6 +335,10 @@ _Related_
 
 Undocumented declaration.
 
+<a name="ResponsiveBlockControl" href="#ResponsiveBlockControl">#</a> **ResponsiveBlockControl**
+
+Undocumented declaration.
+
 <a name="RichText" href="#RichText">#</a> **RichText**
 
 _Related_
