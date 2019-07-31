@@ -872,6 +872,7 @@ class RichText extends Component {
 			__unstableOnReplace: onReplace,
 			allowedFormats,
 			withoutInteractiveFormatting,
+			__unstableContentEditable,
 		} = this.props;
 
 		// Generating a key that includes `tagName` ensures that if the tag
@@ -904,6 +905,7 @@ class RichText extends Component {
 					onMouseDown={ this.onPointerDown }
 					onTouchStart={ this.onPointerDown }
 					setRef={ this.setRef }
+					contentEditable={ __unstableContentEditable }
 				/>
 				{ isSelected && <FormatEdit
 					allowedFormats={ allowedFormats }

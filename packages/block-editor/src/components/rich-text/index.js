@@ -293,6 +293,7 @@ class RichTextWrapper extends Component {
 			isSelected: originalIsSelected,
 			onCreateUndoLevel,
 			placeholder,
+			hasMultiSelection,
 			// eslint-disable-next-line no-unused-vars
 			allowedFormats,
 			withoutInteractiveFormatting,
@@ -354,6 +355,7 @@ class RichTextWrapper extends Component {
 				__unstableOnEnterFormattedText={ onEnterFormattedText }
 				__unstableOnExitFormattedText={ onExitFormattedText }
 				__unstableOnCreateUndoLevel={ onCreateUndoLevel }
+				__unstableContentEditable={ ! hasMultiSelection }
 			>
 				{ ( { isSelected, value, onChange } ) =>
 					<>
@@ -399,6 +401,7 @@ const RichTextContainer = compose( [
 			getSelectionStart,
 			getSelectionEnd,
 			getSettings,
+			hasMultiSelection,
 		} = select( 'core/block-editor' );
 
 		const selectionStart = getSelectionStart();
@@ -417,6 +420,7 @@ const RichTextContainer = compose( [
 			selectionStart: isSelected ? selectionStart.offset : undefined,
 			selectionEnd: isSelected ? selectionEnd.offset : undefined,
 			isSelected,
+			hasMultiSelection: hasMultiSelection(),
 		};
 	} ),
 	withDispatch( ( dispatch, {
