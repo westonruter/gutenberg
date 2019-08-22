@@ -28,6 +28,7 @@ import {
 import { withFilters, IsolatedEventContainer } from '@wordpress/components';
 import { createBlobURL } from '@wordpress/blob';
 import deprecated from '@wordpress/deprecated';
+import { isURL } from '@wordpress/url';
 
 /**
  * Internal dependencies
@@ -124,6 +125,7 @@ class RichTextWrapper extends Component {
 			tagName,
 			canUserUseUnfilteredHTML,
 			multiline,
+			__unstableEmbedURLOnPaste,
 		} = this.props;
 
 		if ( image && ! html ) {
@@ -146,10 +148,20 @@ class RichTextWrapper extends Component {
 			return;
 		}
 
+		let mode = onReplace && onSplit ? 'AUTO' : 'INLINE';
+
+		if (
+			__unstableEmbedURLOnPaste &&
+			isEmpty( value ) &&
+			isURL( plainText.trim() )
+		) {
+			mode = 'BLOCKS';
+		}
+
 		const content = pasteHandler( {
 			HTML: html,
 			plainText,
-			mode: onReplace && onSplit ? 'AUTO' : 'INLINE',
+			mode,
 			tagName,
 			canUserUseUnfilteredHTML,
 		} );
