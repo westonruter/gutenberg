@@ -150,5 +150,31 @@ export const SETTINGS_DEFAULTS = {
 	__experimentalCanUserUseUnfilteredHTML: false,
 	__experimentalEnableLegacyWidgetBlock: false,
 	__experimentalEnableMenuBlock: false,
+	gradients: [
+		{
+			name: __( 'Radial pale pink to cyan' ),
+			gradient: 'radial-gradient(circle, rgba(247,141,167,1) 0%, rgba(6,147,227,1) 100%)',
+		},
+		{
+			name: __( 'Linear purple to amber' ),
+			gradient: 'linear-gradient(90deg, rgba(155,81,224,1) 0%, rgba(252,185,0,1) 100%)',
+		},
+		{
+			name: __( 'Linear red green blue combination' ),
+			gradient: 'linear-gradient(90deg, rgba(254,143,143,1) 7%, rgba(6,156,112,1) 53%, rgba(0,134,252,1) 99%)',
+		},
+		{
+			name: __( 'Linear diagonal pink to cyan' ),
+			gradient: 'linear-gradient(45deg, rgba(247,141,167,1) 0%, rgba(6,147,227,1) 100%)',
+		},
+		{
+			name: __( 'Vertical green and blue' ),
+			gradient: 'linear-gradient(0deg, rgba(34,87,195,1) 0%, rgba(253,187,45,1) 100%)',
+		},
+		{
+			name: __( 'Radial orange and light green' ),
+			gradient: 'radial-gradient(circle, rgba(255,105,0,1) 0%, rgba(123,220,181,1) 100%)',
+		},
+	],
 };
 
