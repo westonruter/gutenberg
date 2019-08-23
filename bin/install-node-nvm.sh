@@ -60,7 +60,7 @@ fi
 # Check if the current node version is up to date.
 if [ "$TRAVIS" != "true" ] && [ "$(nvm current)" != "$(nvm version-remote --lts)" ]; then
 	echo -e $(warning_message "Node version does not match the latest long term support version. Please run this command to install and use it:" )
-	echo -e $(warning_message "$(action_format "nvm install")" )
+	echo -e $(warning_message "$(action_format "nvm install --latest-npm")" )
 	echo -e $(warning_message "After that, re-run the setup script to continue." )
 	exit 1
 fi
@@ -68,9 +68,6 @@ fi
 # Install/update packages
 echo -e $(status_message "Installing and updating NPM packages..." )
 npm install
-
-# Make sure npm is up-to-date
-npm install npm -g
 
 # There was a bug in NPM that caused changes in package-lock.json. Handle that.
 if [ "$TRAVIS" != "true" ] && ! git diff --no-ext-diff --exit-code package-lock.json >/dev/null; then
