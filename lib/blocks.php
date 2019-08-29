@@ -29,6 +29,8 @@ function gutenberg_reregister_core_block_types() {
 		'search.php'          => 'core/search',
 		'tag-cloud.php'       => 'core/tag-cloud',
 		'site-title.php'      => 'core/site-title',
+		'post-title.php'      => 'core/post-title',
+		'post-content.php'    => 'core/post-content',
 	);
 
 	$registry = WP_Block_Type_Registry::get_instance();
