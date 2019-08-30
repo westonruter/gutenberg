@@ -58,6 +58,7 @@ const {
 	getTemplate,
 	getTemplateLock,
 	getBlockListSettings,
+	__experimentalGetLastBlockAttributeChanges,
 	INSERTER_UTILITY_HIGH,
 	INSERTER_UTILITY_MEDIUM,
 	INSERTER_UTILITY_LOW,
@@ -262,60 +263,6 @@ describe( 'selectors', () => {
 					innerBlocks: [],
 				} ],
 			} );
-		} );
-
-		it( 'should merge meta attributes for the block', () => {
-			registerBlockType( 'core/meta-block', {
-				save: ( props ) => props.attributes.text,
-				category: 'common',
-				title: 'test block',
-				attributes: {
-					foo: {
-						type: 'string',
-						source: 'meta',
-						meta: 'foo',
-					},
-				},
-			} );
-
-			const state = {
-				settings: {
-					__experimentalMetaSource: {
-						value: {
-							foo: 'bar',
-						},
-					},
-				},
-				blocks: {
-					byClientId: {
-						123: { clientId: 123, name: 'core/meta-block' },
-					},
-					attributes: {
-						123: {},
-					},
-					order: {
-						'': [ 123 ],
-						123: [],
-					},
-					parents: {
-						123: '',
-					},
-					cache: {
-						123: {},
-					},
-				},
-			};
-
-			expect( getBlock( state, 123 ) ).toEqual( {
-				clientId: 123,
-				name: 'core/meta-block',
-				attributes: {
-					foo: 'bar',
-				},
-				innerBlocks: [],
-			} );
-
-			unregisterBlockType( 'core/meta-block' );
 		} );
 	} );
 
@@ -2024,7 +1971,6 @@ describe( 'selectors', () => {
 				isDisabled: false,
 				utility: 0,
 				frecency: 0,
-				hasChildBlocksWithInserterSupport: false,
 			} );
 			const reusableBlockItem = items.find( ( item ) => item.id === 'core/block/1' );
 			expect( reusableBlockItem ).toEqual( {
@@ -2490,6 +2436,22 @@ describe( 'selectors', () => {
 			};
 
 			expect( getBlockListSettings( state, 'chicken' ) ).toBe( undefined );
+		} );
+	} );
+
+	describe( '__experimentalGetLastBlockAttributeChanges', () => {
+		it( 'returns the last block attributes change', () => {
+			const state = {
+				lastBlockAttributesChange: {
+					block1: { fruit: 'bananas' },
+				},
+			};
+
+			const result = __experimentalGetLastBlockAttributeChanges( state );
+
+			expect( result ).toEqual( {
+				block1: { fruit: 'bananas' },
+			} );
 		} );
 	} );
 } );
